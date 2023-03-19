@@ -1,33 +1,34 @@
 package main;
 
-import heuristicSearch.DestinationVertex;
-import heuristicSearch.HeuristicVertex;
-
-import java.util.HashMap;
-import java.util.Map;
+import buscaHeuristica.BuscaHeuristica;
+import buscaHeuristica.VerticeDestino;
+import buscaHeuristica.VerticeHeuristico;
 
 public class Main {
 
     public static void main(String[] args) {
-        Map<String, HeuristicVertex> heuristicVertices = new HashMap<>();
-        var s = new HeuristicVertex(7);
-        var a = new HeuristicVertex(10);
-        var b = new HeuristicVertex(9);
-        var c = new HeuristicVertex(5);
-        var g = new DestinationVertex();
+        var s = new VerticeHeuristico('s', 17);
+        var a = new VerticeHeuristico('a', 10);
+        var b = new VerticeHeuristico('b', 13);
+        var c = new VerticeHeuristico('c', 4);
+        var d = new VerticeHeuristico('d', 2);
+        var e = new VerticeHeuristico('e', 4);
+        var f = new VerticeHeuristico('f', 1);
+        var g = new VerticeDestino();
 
-        s.link(a, 1);
-        s.link(b, 1);
-        a.link(b, 9);
-        b.link(c, 6);
-        b.link(g, 12);
-        c.link(g, 5);
+        s.ligarVertices(a, 6);
+        s.ligarVertices(b, 5);
+        s.ligarVertices(c, 10);
+        a.ligarVertices(e, 6);
+        b.ligarVertices(d, 7);
+        b.ligarVertices(e, 6);
+        c.ligarVertices(d, 6);
+        d.ligarVertices(f, 6);
+        e.ligarVertices(f, 4);
+        f.ligarVertices(g, 3);
 
-        heuristicVertices.put("s", s);
-        heuristicVertices.put("a", a);
-        heuristicVertices.put("b", b);
-        heuristicVertices.put("c", c);
-        heuristicVertices.put("g", g);
+        BuscaHeuristica aEstrela = new BuscaHeuristica(s);
+        System.out.println(aEstrela.getMelhorCaminho());
 
     }
 
